@@ -46,6 +46,7 @@ app.get("/client", function(req,res){
             console.log("error in SELECT * FROM Employee")
         }else{
             console.log(response.rows)
+            
             res.send({
                 firstname: response.rows[0].firstname,
                 middlename: response.rows[0].middlename,
@@ -77,8 +78,6 @@ app.get("/admin", function(req,res){
 app.listen(process.env.PORT || 5000, function(){
     console.log("connected to node server")
 })
-
-
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static('client/build'));
