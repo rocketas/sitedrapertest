@@ -47,7 +47,6 @@ app.get("/client", function(req,res){
         }else{
             console.log(response.rows)
             res.send({
-                postgreqslEmployeeData: response.rows[0],
                 firstname: response.rows[0].firstname,
                 middlename: response.rows[0].middlename,
                 lastname: response.rows[0].lastname,
@@ -84,8 +83,7 @@ app.listen(process.env.PORT || 5000, function(){
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static('client/build'));
 }
-/*
+
 app.get('*', (request, response) => {
-	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    response.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
 }); 
-*/

@@ -40,7 +40,7 @@ render() {
       <p className="App-intro">Last Name: {this.state.lastname}</p>
       <p className="App-intro">Email: {this.state.email}</p>
       <p className="App-intro">Phone Number: {this.state.phone}</p>
-      <p className="App-intro">Shifts Worked: {this.state.shiftsworked}</p>
+      <p className="App-intro">Shifts Worked: {this.state.title}</p>
       <p className="App-intro">Title: {this.state.title}</p>
 
     </div>
