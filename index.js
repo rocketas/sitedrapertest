@@ -67,9 +67,13 @@ app.get("/admin", function(req,res){
         }else{
             console.log(response.rows[0])
             res.send({
-                postgreqslAdminData: response.rows[0]
-                }
-            );
+                firstname: response.rows[0].firstname,
+                middlename: response.rows[0].middlename,
+                lastname: response.rows[0].lastname,
+                email: response.rows[0].email,
+                phone: response.rows[0].phone,
+                title: response.rows[0].title
+            })     
         }
     })
 });
