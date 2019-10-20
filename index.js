@@ -1,9 +1,9 @@
-var express  = require('express'),
+const express  = require('express'),
     {Client} = require("pg"),
          app = express();
          env = require('dotenv'),
          env.config()
-
+const path = require('path')
 
 
 
@@ -83,10 +83,9 @@ app.listen(process.env.PORT || 5000, function(){
     console.log("connected to node server")
 })
 
-if (process.env.NODE_ENV === 'production') {
-	app.use(express.static('client/build'));
-}
+app.use(express.static('client/build'));
+
 
 app.get('*', (request, response) => {
-    response.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
+    response.sendFile(path.resolve(__dirname, 'client','build','index.html'));
 }); 
