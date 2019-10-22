@@ -33,12 +33,6 @@ client
 .then(() => console.log('connected to PostgreSQL'))
 .catch(err => console.error('connection error to PostgreSQL', err.stack))
  
-
-
-app.get("/", function(req,res){
-    res.send("<a href='admin'> Admin Log In </a> <a href='client'> Client Log In </a>")
-})
-
 app.get("/client", function(req,res){
     console.log("entered client route")
     client.query(" SELECT * FROM Employee", (error,response)=>{
@@ -84,7 +78,6 @@ app.listen(process.env.PORT || 5000, function(){
 })
 
 app.use(express.static('client/build'));
-
 
 app.get('*', (request, response) => {
     response.sendFile(path.resolve(__dirname, 'client','build','index.html'));
