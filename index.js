@@ -25,6 +25,12 @@ let info = {
 };
 
 
+app.use(express.static('client/build'));
+
+app.get('*', (request, response) => {
+    response.sendFile(path.resolve(__dirname, 'client','build','index.html'));
+}); 
+
 
 const client = new Client({connectionString: info.str(), ssl:true})
 
@@ -77,8 +83,4 @@ app.listen(process.env.PORT || 5000, function(){
     console.log("connected to node server")
 })
 
-app.use(express.static('client/build'));
 
-app.get('*', (request, response) => {
-    response.sendFile(path.resolve(__dirname, 'client','build','index.html'));
-}); 
