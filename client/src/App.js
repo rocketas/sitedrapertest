@@ -3,15 +3,14 @@ import React from 'react';
 import Client from './components/client'
 import Home from './components/home'
 import Admin from './components/admin'
-
-
+import Login from "./components/login"
 
 
 import {
   BrowserRouter as Router,
-  Switch,
+  //Switch,
   Route,
-  Link
+ // Link
 } from "react-router-dom";
 
 
@@ -21,7 +20,8 @@ export default function App(){
     <Router>
        <Route path="/"  component={Home}/>
        <Route path="/client"  component={Client}/>
-      <Route path="/admin" component={Admin}/>
+       <Route path="/admin" component={Admin}/>
+       <Route path="/login" component= {Login}/>
     </Router>
   )
 }

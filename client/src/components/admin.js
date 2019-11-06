@@ -6,8 +6,9 @@ export default class admin extends Component {
   };
   componentDidMount() {
 
+    console.log("in admin.js")
     // Call our fetch function below once the component mounts
-    this.callBackendAPI()
+    this.getAdminData()
       .then(res => this.setState({
         firstname: res.firstname,
         middlename: res.middlename,
@@ -17,11 +18,13 @@ export default class admin extends Component {
         title: res.title
       }))
       .catch(err => console.log(err));
+  
   }
   // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
-  callBackendAPI = async () => {
+    getAdminData = async () => {
     const response = await fetch('/admin');
-    const body = await response.json(); 
+    const body = await response.json()
+
     if (response.status !== 200) {
       throw Error(body.message) 
     }

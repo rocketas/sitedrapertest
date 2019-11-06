@@ -1,12 +1,33 @@
 const express  = require('express'),
-    {Client} = require("pg"),
-         app = express();
-         env = require('dotenv'),
+      {Client} = require("pg"),
+         app   = express(),
+         env   = require('dotenv');
          env.config()
-const path = require('path')
+
+const path          = require('path'),
+      generalRoutes = require("./routes/general-routes"), 
+      authRoutes    = require("./routes/auth-routes"),
+      queryString   = require('query-string'),
+      passportGoole = require("./config/google"),
+      passport      = require('passport'),
+      cookieSession = require('cookie-session'),
+      cors          = require('cors')
+
+app.use(function(req,res,next){
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Origin, X-Requested-With, Content-Type,Accept, Authorization")
+  next()
+})
+
+app.use(cookieSession({
+  maxAge: 0.5*60*60*1000,
+  //keys: [cookieKey.Cookie.key]
+  keys: [process.env.COOKIE_KEY]
+}));
 
 
-
+app.use(passport.initialize());
+app.use(passport.session());
 // Using env to hide credentials, used to access postgreSQL
 let info = {
     account : process.env.ACCOUNT_NAME,
@@ -24,63 +45,37 @@ let info = {
       }
 };
 
-
-app.use(express.static('client/build'));
-
-app.get('*', (request, response) => {
-    response.sendFile(path.resolve(__dirname, 'client','build','index.html'));
-}); 
+/*
 
 
-const client = new Client({connectionString: info.str(), ssl:true})
+*/
 
-client
+
+export const postgreSQLclient = new Client({connectionString: info.str(), ssl:true})
+
+postgreSQLclient
 .connect()
 .then(() => console.log('connected to PostgreSQL'))
 .catch(err => console.error('connection error to PostgreSQL', err.stack))
- 
-app.get("/client", function(req,res){
-    console.log("entered client route")
-    client.query(" SELECT * FROM Employee", (error,response)=>{
-        if(error) {
-            console.log("error in SELECT * FROM Employee")
-        }else{
-            console.log(response.rows)
-            
-            res.send({
-                firstname: response.rows[0].firstname,
-                middlename: response.rows[0].middlename,
-                lastname: response.rows[0].lastname,
-                email: response.rows[0].email,
-                phone: response.rows[0].phone,
-                shiftsworked: response.rows[0].shiftsworked,
-                title: response.rows[0].title
-            })        
-        }
-    })
-})
 
-app.get("/admin", function(req,res){
-    client.query("SELECT * FROM admin", (error, response) =>{
-        if(error){
-            console.log("ERROR: SELECT for admin", error)
-        }else{
-            console.log(response.rows[0])
-            res.send({
-                firstname: response.rows[0].firstname,
-                middlename: response.rows[0].middlename,
-                lastname: response.rows[0].lastname,
-                email: response.rows[0].email,
-                phone: response.rows[0].phone,
-                title: response.rows[0].title
-            })     
-        }
-    })
-});
 
+
+
+app.use("/", generalRoutes);
+app.use("/auth", authRoutes);
+app.use(express.static('client/build'));
+
+
+
+/*
+app.get('*', (request, response) => {
+	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+}); 
+*/
 
 app.listen(process.env.PORT || 5000, function(){
     console.log("connected to node server")
 })
+
 
 

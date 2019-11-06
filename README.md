@@ -1,2 +1,4 @@
 # On-Site Drapery
-This repository will have all of the resources for the COMP 523 R Team's web application for On-Site Drapery, LLC. 
+index.js --> Main entry point to web app backend
+
+    - routes searches to appropriate route (as of now, general or authentication)
