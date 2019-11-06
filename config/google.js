@@ -30,10 +30,10 @@ passport.deserializeUser(function(userid, done) {
 passport.use('google', new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:5000/auth/google/callback"
+    callbackURL: "http://localhost:5000/auth/google/callback",
   },
   function(token, tokenSecret, profile, done) {
-
+    console.log("DSFSDFSFSFS")
     let googleID = profile.id.toString()
     let firstname = profile.name.givenName
     let lastname = profile.name.familyName

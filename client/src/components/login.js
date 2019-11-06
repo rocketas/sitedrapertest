@@ -25,16 +25,26 @@ export default class Login extends Component {
   
 connectToGoogle = async ()=>{
 
+  try{
+    console.log("top")
+    let backendLogin = await fetch("/auth/google/login", {
+      method: 'get',
+      mode: 'no-cors'
+    });
+    console.log("bott")
+    console.log(backendLogin)
 
-  //need to direct user to Google oauth2.0
-  //  
+    
+    
+    return backendLogin;
 
-  let backendLogin = await fetch("auth/google/login");
-  let foundUser = await(fetch('/auth/google/success'))
+  }catch(error){
+    console.log(error)
+  }
 
 
-  console.log(backendLogin)
-  return backendLogin
+
+ 
 }
 
     render(){

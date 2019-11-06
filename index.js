@@ -73,9 +73,6 @@ app.get('*', (request, response) => {
 }); 
 */
 
-app.listen(process.env.PORT || 5000, function(){
-    console.log("connected to node server")
-})
-
+module.exports = app;
 
 
