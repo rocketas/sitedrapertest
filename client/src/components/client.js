@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 
 export default class client extends Component {
-  state = {
-    data: null
-  };
+  constructor(props){
+    super(props)
+    this.state = {
+      data: null
+    };
+    this.getUserData = this.getUserData.bind(this)
+  }
+ 
   componentDidMount() {
 
     // Call our fetch function below once the component mounts

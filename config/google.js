@@ -33,7 +33,6 @@ passport.use('google', new GoogleStrategy({
     callbackURL: "http://localhost:5000/auth/google/callback",
   },
   function(token, tokenSecret, profile, done) {
-    console.log("DSFSDFSFSFS")
     let googleID = profile.id.toString()
     let firstname = profile.name.givenName
     let lastname = profile.name.familyName

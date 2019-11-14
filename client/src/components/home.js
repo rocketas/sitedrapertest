@@ -3,9 +3,14 @@ import { Link } from 'react-router-dom';
 //import Login from './login'
 
 export default class client extends Component {
-  state = {
-    data: null
-  };
+
+  constructor(props){
+    super(props)
+    this.state = {
+      data: null
+    };
+  }
+  
 
   // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
 render() {

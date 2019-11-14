@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 
 export default class admin extends Component {
-  state = {
-    data: null
-  };
+
+  constructor(props){
+    super(props);
+    this.state = {
+      data: null
+    };
+    this.getAdminData = this.getAdminData.bind(this)
+  }
+
   componentDidMount() {
 
     console.log("in admin.js")
